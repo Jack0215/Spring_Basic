@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="firstStudent" class="com.dto.Student">
+	<property name="name" value="홍길동"></property> <!-- 여기 홍길동이 setName에 넘어감 -->
+	<property name="age" value="20"></property>  <!-- age는 com.dto/Student의 setAge함수이름이 name=""에 들어간다. -->
+	</bean> 
+	</beans>

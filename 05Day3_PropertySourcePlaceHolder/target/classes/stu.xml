@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<bean
+		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"> <!-- set location을 갖고있음 -->
+		<property name="locations"> <!-- 아래 리스트를 담아서 location에 담아줌 -->
+			<list>
+				<value>classpath:com/config/jdbc.properties</value>
+			</list>
+		</property> 
+	</bean>
+	
+	<bean id="xxx" class="com.dto.Student"> <!-- 아래의 값을 꺼내와서 Student에 주입 -->
+	<property name="name" value="${jdbc.name}"/> <!-- name="name"의 뒤 name은 setmethod의 setname의 name이다. -->
+	<property name="age" value="${jdbc.age}"/>
+	</bean>
+</beans>

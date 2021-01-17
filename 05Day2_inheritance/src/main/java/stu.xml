@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="p" abstract="true"> <!-- abstract="true"은 부모클래스로 지정하는 명령어이다. -->
+	<property name="name" value="홍길동"/>
+	<property name="age" value="20"/>
+	</bean>
+	
+	<bean id="man" class="com.dto.Man" parent="p">   <!-- p는 11라인의 bean이며, man은 name,age를 가지고 -->
+	<property name="address" value="서울"/>			 <!-- 추가로 address까지 가진다. -->
+	</bean>
+	
+	<bean id="woman" class="com.dto.Woman" parent="p"> <!-- p는 11라인의 bean이며, man은 name,age를 가지고 -->
+	<property name="name" value="유관순"/>			 <!-- set proerty를 사용해 name을 바꿨다. -->
+	<property name="email" value="aaa@naver.com"/>   <!-- 추가로 email까지 가진다. -->
+	</bean>
+</beans>

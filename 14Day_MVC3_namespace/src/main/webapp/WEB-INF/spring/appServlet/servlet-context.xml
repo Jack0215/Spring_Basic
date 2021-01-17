@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:default-servlet-handler/>
+	
+	<!-- 1. 직접 jsp요청 -->
+	<!-- path에서 main.jsp를 불러오도록 지정 --> 
+	<mvc:view-controller path="/" view-name="main"/>
+	<mvc:view-controller path="/main" view-name="main"/>
+										<!-- view-name = 실행할 jsp를 찾아간다. -->
+	<mvc:view-controller path="/aaa" view-name="main2"/>
+	<!-- /main 주소 요청 시 main.jsp를 뷰로 사용 -->
+	
+	<mvc:resources location="/WEB-INF/image/" mapping="/image/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"></mvc:resources>
+
+	<!-- 2. jsp 전담 ViewResolver
+	<mvc:view-resolvers>
+	<mvc:bean-name>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	</bean>
+	</mvc:bean-name>
+		<mvc:jsp prefix="/WEB-INF/views" suffix=".jsp"/>
+	</mvc:view-resolvers>  -->
+
+	
+
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.controller" />
+	
+	
+	
+</beans:beans>

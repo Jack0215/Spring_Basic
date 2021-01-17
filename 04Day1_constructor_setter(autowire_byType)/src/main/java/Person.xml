@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="xxxxxxxxxxx" class="com.spring.Cat"> 
+	<property name="catAge" value="10"></property>
+	<property name="catName" value= "야옹이"></property> 
+	</bean>
+	
+														
+								<!-- 받고자하는 클래스타입이 같은걸 찾기 때문 타입이 같으면 오류가 생긴다. -->
+								<!-- 필요한걸 받으려면 candidate or primary로 값을 설정해줘야한다. -->
+	<bean id="onePerson" class="com.spring.Person" autowire="byType">
+	<property name="username" value="홍길동"></property>
+	</bean>
+</beans>  

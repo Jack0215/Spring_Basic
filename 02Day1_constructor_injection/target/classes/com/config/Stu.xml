@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- id=stu 추가, 이 객체를 참조하는 값이 stu라는 아이디, stu=new stu와 같다.
+	stu가 객체를 참조하는 참조변수와 같다. -->	 
+	<bean id="aa" class="com.dto.Student"></bean> <!-- bean을 사용하려면 main에서 getBean 명령어를 사용해야한다. -->
+	<bean id="bb" class="com.dto.Student"></bean> <!-- 8라인과 9라인은 다른 객체다.  --> 
+</beans>  

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 보여줄 페이지가 /WEB-INF/views/ 위치를 포함하고 파일이 .jsp 다 라는 설정이 붙게됨 -->
+	
+	<!-- controller class bean 생성 -->
+	<bean id="xxx" class="com.controller.TestController"></bean>
+	<!-- controller class bean 생성이 끝났고 controller작성만 하면 됨-->
+</beans>

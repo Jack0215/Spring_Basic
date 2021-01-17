@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 1.PropertyPlaceholder 사용해서 db정보4가지 읽어옴(properties)
+		 2.4가지 정보를 이용해서 datasource생성(dependency가 있어야함)
+		 3.datasource 이용해서 jdbctemplate생성
+		 4. jdbctemplate을 dao에 템플릿 넣어줘야함(생성자를 만들거나, set하거나)
+		 5. dao를 서비스에 주입
+		 6. 메인에서 getBean을 통해 service 사용-->
+	
+	<!-- JDBC 연동 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+		<value>classpath:db.properties</value>
+		</property>
+	</bean>
+	<!-- dataSource는 connection을 가지고있음 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}"/>
+	<property name="url" value="${url}"/>
+	<property name="username" value="${userid}"/>
+	<property name="password" value="${passwd}"/>
+	</bean>
+	
+	<!-- DataSourceTransactionManaget 설정, DataSource 주입 -->
+	<!-- @transaction관련된 애들은 아래 애들이 관리해줌 -->
+	<!-- 커밋과 롤백 작업을 알아서 처리해줌 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Transaction관련 어노테이션 활성화 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+	proxy-target-class="false"/>
+	
+	<!-- jdbcTemplate 빈 생성 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- JDBC 연동 DAO 생성 및 jdbcTemplate 주입 -->
+	<bean id="deptDAO" class="com.dao.ProductDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean> 
+	
+	<!-- Service 생성 및 dao 주입, Main에서 Service get, 사용 -->
+	<bean id="deptService" class="com.service.ProductService">
+	<property name="dao" ref="deptDAO"></property>
+	</bean>
+	
+	
+</beans>

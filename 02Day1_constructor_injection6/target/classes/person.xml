@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="person1" class="com.dto.Person">
+	<constructor-arg name="name" value="홍길동"></constructor-arg>
+	<constructor-arg name="age" value="100"></constructor-arg>
+	<constructor-arg name="gender" value="male"></constructor-arg>
+	</bean>
+	
+	<bean id="person2" class="com.dto.Person">
+	<constructor-arg name="name" value="유관순"></constructor-arg>
+	<constructor-arg name="age" value="100"></constructor-arg>
+	<constructor-arg name="gender" value="female"></constructor-arg>
+	</bean>
+	
+</beans> 

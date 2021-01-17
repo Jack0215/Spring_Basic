@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 등록된 bean들의 어노테이션 활성화 -->
+	<context:annotation-config/>
+	<context:component-scan base-package="com.*"/>
+	<!-- 1.jdbc.properties 생성 -->
+	<context:property-placeholder location="classpath:com/config/jdbc.properties"/>
+	
+	<!-- 2. dbcp2를 이용한 데이터Source생성  -->
+	<bean id="dataSource" 
+		class="org.apache.commons.dbcp2.BasicDataSource"> 
+		<property name="driverClassName" value="${driver}" /> 
+		<property name="url" value="${url}" /> 
+		<property name="username" value="${userid}" /> 
+		<property name="password" value="${passwd}" /> 
+	</bean> 
+	 
+	 <!-- Transaction 처리 시작 -->
+	 <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+	 </bean> 
+	 <tx:annotation-driven transaction-manager="txManager"/> 
+	 <!-- Transaction 처리 종료 -->
+	 
+	 <!-- 3. SqlSessionFactoryBean 생성 -->
+	 <bean id="sessionFactory" 
+	 class="org.mybatis.spring.SqlSessionFactoryBean">
+	 <property name="dataSource" ref="dataSource"></property>
+	 <property name="mapperLocations">
+	 <list>
+	 <value>classpath:com/config/DeptMapper.xml</value>
+	 </list>
+	 </property>
+	  
+	 <property name="typeAliases">
+	 	<list>
+	 	<value>com.dto.DeptDTO</value>
+	 	</list>
+	 </property>
+	 </bean>
+	 <!-- 4. SqlSessionTemplate -->
+	 <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	 	<constructor-arg name="sqlSessionFactory" ref="sessionFactory"></constructor-arg>
+	 </bean>
+	 
+	 <!-- 종료 -->
+	 <bean id="dao" class="com.dao.DeptDAO"></bean>
+	 <bean id="service" class="com.service.DeptService"></bean>
+	 
+	 
+</beans>

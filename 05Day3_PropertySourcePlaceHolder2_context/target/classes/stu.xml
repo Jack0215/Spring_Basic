@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+										<!-- classpath를 빼도 실행이 된다. -->
+	<context:property-placeholder location="classpath:com/config/jdbc.properties"/>
+	<!-- jdbc의 name과 age를 읽어옴 -->
+	
+	<bean id="xxx" class="com.dto.Student"> <!-- 아래의 값을 꺼내와서 Student에 주입 -->
+	<property name="name" value="${jdbc.name}"/> <!-- name="name"의 뒤 name은 setmethod의 setname의 name이다. -->
+	<property name="age" value="${jdbc.age}"/>
+	</bean>
+</beans>

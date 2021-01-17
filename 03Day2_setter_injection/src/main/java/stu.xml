@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="firstStudent" class="com.dto.Student"> <!-- 기본 생성자 사용해서 객체 생성 -->
+	<property name="name" value="홍길동"></property> <!-- 여기 홍길동이 setName에 넘어감 -->
+	</bean> 
+	</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="cat" class="com.spring.Cat"> 
+	<constructor-arg name="catAge" value="10"/>
+	<constructor-arg name="catName" value= "야옹이"/>
+	</bean>     
+					 						<!-- autowire로 자동 주입 받겠다. 타입은 byName과 byType 2개가 있음 -->
+											<!-- set함수의  이름과 같은 id를 가진 객체를 주입받음(여기선 6라인 id="cat") -->
+	<bean id="onePerson" class="com.spring.Person" autowire="byName">
+	<property name="username" value="홍길동"></property>
+	<!--아무것도 안써주면 byName에 의해 Person에 있는 cat이 자동 주입 됨 -->
+	
+	<!-- cat에 대한 property삭제 -->
+	<!-- <property name="cat" ref="cat"></property> -->
+	</bean>
+</beans>    
